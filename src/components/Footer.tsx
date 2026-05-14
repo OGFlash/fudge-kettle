@@ -18,11 +18,16 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold text-lg mb-4 text-white">Visit Us</h4>
               <div className="space-y-2 text-chocolate-200">
-                <p>7900 E US Highway 36</p>
+                <p>8100 E US Highway 36, Suite J</p>
                 <p>Avon, IN 46123</p>
                 <p className="mt-3">
-                  <a href="tel:+13172721906" className="hover:text-teal-400 transition-colors">
-                    (317) 272-1906
+                  <a href="tel:+13172686216" className="hover:text-teal-400 transition-colors">
+                    (317) 268-6216
+                  </a>
+                </p>
+                <p>
+                  <a href="mailto:info@thefudgekettle.com" className="hover:text-teal-400 transition-colors">
+                    info@thefudgekettle.com
                   </a>
                 </p>
               </div>
@@ -31,10 +36,11 @@ export default function Footer() {
             <div>
               <h4 className="font-semibold text-lg mb-4 text-white">Hours</h4>
               <div className="space-y-2 text-chocolate-200">
-                <p>Monday - Saturday</p>
-                <p>10:00 AM - 6:00 PM</p>
+                <p>Mon – Thu: 11am – 6pm</p>
+                <p>Friday: 11am – 7pm</p>
+                <p>Saturday: 11am – 6pm</p>
                 <p className="mt-3">Sunday</p>
-                <p>12:00 PM - 5:00 PM</p>
+                <p>12pm – 5pm</p>
               </div>
             </div>
           </div>
@@ -68,7 +74,7 @@ export default function Footer() {
                   <Mail className="w-6 h-6" />
                 </a>
                 <a
-                  href="tel:+13172721906"
+                  href="tel:+13172686216"
                   className="text-chocolate-200 hover:text-teal-400 transition-colors"
                   aria-label="Phone"
                 >

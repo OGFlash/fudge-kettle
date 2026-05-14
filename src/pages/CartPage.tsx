@@ -11,7 +11,7 @@ export default function CartPage() {
   const total = subtotal + tax;
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-20 pb-24">
+    <div className="min-h-screen bg-cream-50 pt-28 pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -48,8 +48,8 @@ export default function CartPage() {
                     className="bg-white rounded-2xl p-6 shadow-lg"
                   >
                     <div className="flex gap-6">
-                      <div className="w-32 h-32 rounded-xl bg-gradient-to-br from-teal-100 to-chocolate-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-5xl">{item.image}</span>
+                      <div className="w-32 h-32 rounded-xl bg-gradient-to-br from-teal-100 to-chocolate-100 flex-shrink-0 overflow-hidden">
+                        <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                       </div>
 
                       <div className="flex-1 min-w-0">
@@ -127,8 +127,8 @@ export default function CartPage() {
                       <span className="font-semibold">${tax.toFixed(2)}</span>
                     </div>
                     <div className="flex justify-between text-chocolate-700">
-                      <span className="text-sm">Shipping</span>
-                      <span className="text-sm font-semibold">Calculated at checkout</span>
+                      <span className="text-sm">Fulfillment</span>
+                      <span className="text-sm font-semibold text-teal-600">In-store pickup only</span>
                     </div>
                     <div className="pt-4 border-t-2 border-chocolate-200">
                       <div className="flex justify-between text-2xl font-bold text-chocolate-900">

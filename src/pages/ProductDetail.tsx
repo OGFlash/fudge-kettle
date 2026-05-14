@@ -41,7 +41,7 @@ export default function ProductDetail() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-cream-50 pt-20 flex items-center justify-center">
+      <div className="min-h-screen bg-cream-50 pt-28 flex items-center justify-center">
         <div className="animate-spin rounded-full h-16 w-16 border-4 border-teal-600 border-t-transparent"></div>
       </div>
     );
@@ -49,7 +49,7 @@ export default function ProductDetail() {
 
   if (!product) {
     return (
-      <div className="min-h-screen bg-cream-50 pt-20 flex items-center justify-center">
+      <div className="min-h-screen bg-cream-50 pt-28 flex items-center justify-center">
         <div className="text-center">
           <h1 className="font-serif text-3xl font-bold text-chocolate-900 mb-4">Product not found</h1>
           <Link to="/shop" className="text-teal-600 hover:text-teal-700 font-semibold">
@@ -64,6 +64,14 @@ export default function ProductDetail() {
     .filter((opt) => opt.required)
     .every((opt) => selectedOptions[opt.name]);
 
+  // Compute active price: if any selected option has a prices map, use it
+  const computedPrice = product.options.reduce((price, option) => {
+    if (option.prices && selectedOptions[option.name] && option.prices[selectedOptions[option.name]] !== undefined) {
+      return option.prices[selectedOptions[option.name]];
+    }
+    return price;
+  }, product.price);
+
   const handleAddToCart = () => {
     if (!allRequiredOptionsSelected) return;
 
@@ -71,7 +79,7 @@ export default function ProductDetail() {
       productId: product.id,
       slug: product.slug,
       name: product.name,
-      price: product.price,
+      price: computedPrice,
       image: product.images[0],
       selectedOptions,
       quantity,
@@ -88,7 +96,7 @@ export default function ProductDetail() {
       productId: product.id,
       slug: product.slug,
       name: product.name,
-      price: product.price,
+      price: computedPrice,
       image: product.images[0],
       selectedOptions,
       quantity,
@@ -98,7 +106,7 @@ export default function ProductDetail() {
   };
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-20 pb-24">
+    <div className="min-h-screen bg-cream-50 pt-28 pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, x: -20 }}
@@ -123,8 +131,12 @@ export default function ProductDetail() {
               transition={{ duration: 0.8, ease: 'easeInOut' }}
             >
               <div className="sticky top-24">
-                <div className="bg-gradient-to-br from-teal-100 to-chocolate-100 rounded-3xl aspect-square flex items-center justify-center shadow-2xl">
-                  <div className="text-9xl">{product.images[0]}</div>
+                <div className="rounded-3xl aspect-square overflow-hidden shadow-2xl bg-gradient-to-br from-teal-100 to-chocolate-100">
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
             </motion.div>
@@ -146,7 +158,7 @@ export default function ProductDetail() {
               </h1>
 
               <p className="text-3xl font-bold text-chocolate-900 mb-6">
-                ${product.price.toFixed(2)}
+                ${computedPrice.toFixed(2)}
               </p>
 
               <p className="text-lg text-chocolate-700 leading-relaxed mb-8">

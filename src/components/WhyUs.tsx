@@ -36,18 +36,15 @@ export default function WhyUs() {
               transition={{ duration: 0.8, ease: 'easeInOut' }}
             >
               <h2 className="font-serif text-4xl sm:text-5xl font-bold text-chocolate-900 mb-6">
-                A Sweet Tradition in Avon
+                Our Story
               </h2>
               
               <p className="text-lg text-chocolate-700 leading-relaxed mb-8">
-                At The Fudge Kettle, we believe that the best treats come from the heart. 
-                Every batch of fudge, every piece of candy, and every gift is made with the 
-                same care and attention we'd give to our own families.
+                The Fudge Kettle was born in April 2020, opening our first brick &amp; mortar location right here in Avon, Indiana. New owners took over in May 2023 and have been dedicated to growing the community and getting out to local events ever since.
               </p>
 
               <p className="text-lg text-chocolate-700 leading-relaxed mb-10">
-                We're more than a candy shop—we're a gathering place where memories are made, 
-                celebrations begin, and sweetness is shared.
+                We love seeing you all at events — and in the store, where you'll find fresh fudge, new &amp; nostalgic candies, freeze-dried treats made right in our shop, and unique gifts from local artisan vendors.
               </p>
 
               <div className="space-y-6">
@@ -85,12 +82,12 @@ export default function WhyUs() {
               className="relative"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <div className="aspect-square bg-gradient-to-br from-chocolate-300 via-teal-200 to-cream-200 flex items-center justify-center">
-                  <div className="text-center text-chocolate-700 p-8">
-                    <div className="text-7xl mb-4">👨‍🍳</div>
-                    <p className="font-serif text-2xl font-semibold">Crafting Magic</p>
-                    <p className="text-sm mt-2">Behind-the-scenes photography</p>
-                  </div>
+                <div className="aspect-square">
+                  <img
+                    src="/team.jpg"
+                    alt="The Fudge Kettle team"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
 
@@ -100,8 +97,8 @@ export default function WhyUs() {
                 transition={{ duration: 0.6, delay: 0.6, ease: 'easeInOut' }}
                 className="absolute -bottom-8 -right-8 bg-teal-600 text-white rounded-2xl shadow-2xl p-8 max-w-xs"
               >
-                <p className="font-serif text-3xl font-bold mb-2">25+</p>
-                <p className="text-teal-100 font-medium">Flavors of handmade fudge</p>
+                <p className="font-serif text-3xl font-bold mb-2">Open Since</p>
+                <p className="text-teal-100 font-medium">August 2020 in Avon, IN</p>
               </motion.div>
             </motion.div>
           </div>

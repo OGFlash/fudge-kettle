@@ -3,18 +3,18 @@ import { useInView } from 'framer-motion';
 import { useRef } from 'react';
 import { Instagram } from 'lucide-react';
 
-const mentions = [
-  { name: 'Indiana Local', logo: '📰' },
-  { name: 'Sweet Living Magazine', logo: '📖' },
-  { name: 'Avon Community', logo: '🏘️' },
-  { name: 'Midwest Eats', logo: '🍴' },
+const eventPhotos = [
+  { src: '/Avon-community-school-event.jpg', alt: 'Avon community school event' },
+  { src: '/center-grove-high-school-event.jpg', alt: 'Center Grove High School event' },
+  { src: '/Avon-community-school-event2.jpg', alt: 'Avon school event' },
+  { src: '/center-grove-high-school-event2.jpg', alt: 'Center Grove event' },
 ];
 
 const instagramPosts = [
-  { id: 1, emoji: '🍫' },
-  { id: 2, emoji: '🎁' },
-  { id: 3, emoji: '🍬' },
-  { id: 4, emoji: '💝' },
+  { id: 1, src: '/coco-covered-oreos.jpg', alt: 'Chocolate covered Oreos' },
+  { id: 2, src: '/strawberry-coco.jpg', alt: 'Strawberry chocolate treats' },
+  { id: 3, src: '/freeze-dried-red-hots.jpg', alt: 'Freeze dried Red Hots' },
+  { id: 4, src: '/fudge4.jpg', alt: 'Handmade fudge selection' },
 ];
 
 export default function SocialProof() {
@@ -31,10 +31,10 @@ export default function SocialProof() {
           className="text-center max-w-3xl mx-auto mb-16"
         >
           <h2 className="font-serif text-4xl sm:text-5xl font-bold text-chocolate-900 mb-4">
-            As Featured In
+            Out in the Community
           </h2>
           <p className="text-lg text-chocolate-600">
-            Trusted by the community and loved by visitors from near and far.
+            We love getting out to local events! Come find us at schools, fairs, and community gatherings across Avon and beyond.
           </p>
         </motion.div>
 
@@ -42,20 +42,17 @@ export default function SocialProof() {
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8, delay: 0.2, ease: 'easeInOut' }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-20 max-w-5xl mx-auto"
+          className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-20 max-w-5xl mx-auto"
         >
-          {mentions.map((mention, index) => (
+          {eventPhotos.map((photo, index) => (
             <motion.div
-              key={mention.name}
+              key={photo.src}
               initial={{ opacity: 0, scale: 0.9 }}
               animate={isInView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.3 + index * 0.1, ease: 'easeInOut' }}
-              className="bg-white rounded-2xl p-8 flex flex-col items-center justify-center hover:shadow-xl transition-all duration-300 hover:-translate-y-1 border border-chocolate-100"
+              className="aspect-square rounded-2xl overflow-hidden shadow-lg hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="text-5xl mb-3">{mention.logo}</div>
-              <p className="text-sm font-semibold text-chocolate-700 text-center">
-                {mention.name}
-              </p>
+              <img src={photo.src} alt={photo.alt} className="w-full h-full object-cover" />
             </motion.div>
           ))}
         </motion.div>
@@ -80,9 +77,9 @@ export default function SocialProof() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={isInView ? { opacity: 1, scale: 1 } : {}}
                 transition={{ duration: 0.6, delay: 0.7 + index * 0.1, ease: 'easeInOut' }}
-                className="aspect-square rounded-2xl overflow-hidden bg-gradient-to-br from-teal-100 to-chocolate-100 flex items-center justify-center hover:scale-105 transition-transform duration-300 cursor-pointer shadow-lg"
+                className="aspect-square rounded-2xl overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300 cursor-pointer"
               >
-                <div className="text-6xl">{post.emoji}</div>
+                <img src={post.src} alt={post.alt} className="w-full h-full object-cover" />
               </motion.div>
             ))}
           </div>

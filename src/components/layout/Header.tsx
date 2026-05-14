@@ -12,7 +12,20 @@ export default function Header() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-sm z-30">
+      <header className="fixed top-0 left-0 right-0 z-30">
+        <div className="bg-teal-600 text-white text-sm text-center py-2 px-4">
+          <span className="font-medium">This is a concept/demo website.&nbsp;</span>
+          <span>Visit the real Fudge Kettle at&nbsp;</span>
+          <a
+            href="https://thefudgekettle.com/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline font-semibold hover:text-red-200 transition-colors"
+          >
+            thefudgekettle.com
+          </a>
+        </div>
+        <div className="bg-white/95 backdrop-blur-sm shadow-sm">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-20">
             <Link to="/" className="font-serif text-2xl font-bold text-chocolate-900 hover:text-teal-600 transition-colors">
@@ -108,6 +121,7 @@ export default function Header() {
               </div>
             </nav>
           )}
+        </div>
         </div>
       </header>
 

@@ -3,6 +3,7 @@ export interface ProductOption {
   type: 'single' | 'dropdown';
   required: boolean;
   values: string[];
+  prices?: Record<string, number>; // value → absolute price override
 }
 
 export interface Product {

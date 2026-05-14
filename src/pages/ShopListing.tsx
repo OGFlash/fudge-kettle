@@ -1,6 +1,5 @@
 import { motion } from 'framer-motion';
-import { useInView } from 'framer-motion';
-import { useRef, useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Search } from 'lucide-react';
 import { shopApi } from '../api/shopApi';
@@ -14,8 +13,6 @@ const categories = [
 ];
 
 export default function ShopListing() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, amount: 0.1 });
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [products, setProducts] = useState<Product[]>([]);
@@ -42,7 +39,7 @@ export default function ShopListing() {
   });
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-20 pb-24">
+    <div className="min-h-screen bg-cream-50 pt-28 pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -102,22 +99,25 @@ export default function ShopListing() {
             <div className="animate-spin rounded-full h-16 w-16 border-4 border-teal-600 border-t-transparent"></div>
           </div>
         ) : (
-          <div ref={ref} className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
             {filteredProducts.map((product, index) => (
             <motion.div
               key={product.id}
               initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.1 }}
               transition={{ duration: 0.6, delay: index * 0.1, ease: 'easeInOut' }}
             >
               <Link
                 to={`/shop/${product.slug}`}
                 className="group block bg-white rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
               >
-                <div className="aspect-square bg-gradient-to-br from-teal-100 to-chocolate-100 flex items-center justify-center relative overflow-hidden">
-                  <div className="text-7xl group-hover:scale-110 transition-transform duration-300">
-                    {product.images[0]}
-                  </div>
+                <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-teal-100 to-chocolate-100">
+                  <img
+                    src={product.images[0]}
+                    alt={product.name}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
                   {product.limitedEdition && (
                     <div className="absolute top-4 right-4 bg-chocolate-800 text-white text-xs font-bold px-3 py-1 rounded-full">
                       Limited
@@ -131,7 +131,15 @@ export default function ShopListing() {
                   <p className="text-chocolate-600 text-sm mb-4 line-clamp-2">{product.description}</p>
                   <div className="flex items-center justify-between">
                     <span className="text-2xl font-bold text-chocolate-900">
-                      ${product.price.toFixed(2)}
+                      {(() => {
+                        const allPrices = product.options
+                          .filter(o => o.prices)
+                          .flatMap(o => Object.values(o.prices!));
+                        if (allPrices.length > 0) {
+                          return `From $${Math.min(...allPrices).toFixed(2)}`;
+                        }
+                        return `$${product.price.toFixed(2)}`;
+                      })()}
                     </span>
                     <span className="text-teal-600 font-semibold group-hover:gap-2 flex items-center gap-1 transition-all">
                       View

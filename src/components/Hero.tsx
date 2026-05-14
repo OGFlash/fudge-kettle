@@ -21,8 +21,8 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.2, ease: 'easeInOut' }}
                 className="font-serif text-5xl sm:text-6xl lg:text-7xl font-bold text-chocolate-900 leading-tight mb-6"
               >
-                Handcrafted Joy,
-                <span className="block text-teal-600">One Batch at a Time</span>
+                Satisfy Your
+                <span className="block text-teal-600">Sweet Tooth</span>
               </motion.h1>
               
               <motion.p
@@ -31,7 +31,7 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.4, ease: 'easeInOut' }}
                 className="text-lg sm:text-xl text-chocolate-700 mb-8 leading-relaxed max-w-xl mx-auto lg:mx-0"
               >
-                Fresh fudge, specialty candies, and artisan gifts made with love in the heart of Avon, Indiana.
+                Experience our homemade fudge, candies &amp; handcrafted gifts — made fresh in small batches right here in Avon, Indiana.
               </motion.p>
 
               <motion.div
@@ -64,12 +64,12 @@ export default function Hero() {
               className="relative"
             >
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <div className="aspect-[4/5] bg-gradient-to-br from-chocolate-200 via-chocolate-300 to-teal-300 flex items-center justify-center">
-                  <div className="text-center text-chocolate-700 p-8">
-                    <div className="text-6xl mb-4">🍫</div>
-                    <p className="font-serif text-2xl font-semibold">Product Image</p>
-                    <p className="text-sm mt-2">Hero product photography</p>
-                  </div>
+                <div className="aspect-[4/5]">
+                  <img
+                    src="/fudge2.jpg"
+                    alt="Handmade fudge at The Fudge Kettle"
+                    className="w-full h-full object-cover"
+                  />
                 </div>
                 <div className="absolute inset-0 bg-gradient-to-t from-chocolate-900/20 to-transparent pointer-events-none"></div>
               </div>
@@ -80,8 +80,8 @@ export default function Hero() {
                 transition={{ duration: 0.8, delay: 0.8, ease: 'easeInOut' }}
                 className="absolute -bottom-6 -left-6 bg-white rounded-2xl shadow-xl p-6 max-w-xs hidden lg:block"
               >
-                <p className="font-serif text-chocolate-900 text-lg font-semibold mb-1">Fresh Daily</p>
-                <p className="text-chocolate-600 text-sm">Made in small batches with premium ingredients</p>
+                <p className="font-serif text-chocolate-900 text-lg font-semibold mb-1">Made Fresh Daily</p>
+                <p className="text-chocolate-600 text-sm">Small batches, premium ingredients, since 2020</p>
               </motion.div>
             </motion.div>
           </div>

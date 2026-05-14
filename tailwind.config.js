@@ -7,35 +7,38 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Accent: deep raspberry — primary CTA, links, highlights
         teal: {
-          50: '#f0fdfa',
-          100: '#ccfbf1',
-          200: '#99f6e4',
-          300: '#5eead4',
-          400: '#2dd4bf',
-          500: '#14b8a6',
-          600: '#0d9488',
-          700: '#0f766e',
-          800: '#115e59',
-          900: '#134e4a',
+          50:  '#fff0f5',
+          100: '#ffd6e5',
+          200: '#ffaacb',
+          300: '#f772a0',
+          400: '#e84b82',
+          500: '#d1295f',  // ← primary brand accent
+          600: '#b01f4e',
+          700: '#8c163d',
+          800: '#66102c',
+          900: '#420a1c',
         },
+        // Deep plum/wine — headings, body text, dark surfaces (replaces brown)
         chocolate: {
-          50: '#faf8f5',
-          100: '#f5f0e8',
-          200: '#e8dcc8',
-          300: '#d4c0a1',
-          400: '#b89968',
-          500: '#8b6f47',
-          600: '#6d5537',
-          700: '#5a442c',
-          800: '#4a3826',
-          900: '#3d2f21',
+          50:  '#faf8fb',
+          100: '#f0eaf4',
+          200: '#d9c9e4',
+          300: '#b99ecb',
+          400: '#9270ab',
+          500: '#6e4a87',
+          600: '#523369',
+          700: '#3a2250',
+          800: '#261438',
+          900: '#150a22',
         },
+        // Surface: soft blush ivory — backgrounds and subtle fills
         cream: {
-          50: '#fdfcfb',
-          100: '#faf7f2',
-          200: '#f5ede3',
-          300: '#ede1d1',
+          50:  '#fefbfd',
+          100: '#fdf3f8',
+          200: '#f7e2ef',
+          300: '#eecde1',
         },
       },
       fontFamily: {

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { CheckCircle } from 'lucide-react';
 import { useCart } from '../context/CartContext';
+import { submitCheckout } from '../api/formApi';
 
 export default function CheckoutPage() {
   const { cart, getSubtotal, clearCart } = useCart();
@@ -14,25 +15,34 @@ export default function CheckoutPage() {
     notes: '',
   });
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
 
   const subtotal = getSubtotal();
   const tax = subtotal * 0.07;
   const total = subtotal + tax;
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
-    setShowSuccess(true);
-    
-    setTimeout(() => {
-      clearCart();
-      navigate('/shop');
-    }, 3000);
+    setIsSubmitting(true);
+    setSubmitError(null);
+    try {
+      await submitCheckout(formData as Record<string, string>);
+      setShowSuccess(true);
+      setTimeout(() => {
+        clearCart();
+        navigate('/shop');
+      }, 4000);
+    } catch {
+      setSubmitError('Something went wrong submitting your order. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   if (showSuccess) {
     return (
-      <div className="min-h-screen bg-cream-50 pt-20 pb-24 flex items-center justify-center">
+      <div className="min-h-screen bg-cream-50 pt-28 pb-24 flex items-center justify-center">
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -46,11 +56,14 @@ export default function CheckoutPage() {
           >
             <CheckCircle className="w-24 h-24 text-teal-600 mx-auto mb-6" />
           </motion.div>
-          <h2 className="font-serif text-4xl font-bold text-chocolate-900 mb-4">Order Placed!</h2>
-          <p className="text-chocolate-600 text-lg mb-8">
-            Thank you for your order. We'll be in touch soon to confirm the details!
+          <h2 className="font-serif text-4xl font-bold text-chocolate-900 mb-4">Order Received!</h2>
+          <p className="text-chocolate-600 text-lg mb-4">
+            Thanks, {formData.name.split(' ')[0]}! We've received your order and will be in touch at {formData.email} to confirm details.
           </p>
-          <p className="text-chocolate-500 text-sm">Redirecting you back to the shop...</p>
+          <p className="text-chocolate-500 text-sm mb-8">
+            Remember, this is an in-store pickup order. We'll reach out within 1 business day.
+          </p>
+          <p className="text-chocolate-400 text-sm">Redirecting you back to the shop...</p>
         </motion.div>
       </div>
     );
@@ -62,7 +75,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-cream-50 pt-20 pb-24">
+    <div className="min-h-screen bg-cream-50 pt-28 pb-24">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -75,6 +88,13 @@ export default function CheckoutPage() {
           <div className="grid lg:grid-cols-5 gap-8">
             <div className="lg:col-span-3">
               <form onSubmit={handleSubmit} className="bg-white rounded-3xl p-8 shadow-lg">
+                <div className="mb-6 p-4 bg-teal-50 rounded-xl border border-teal-200 flex gap-3">
+                  <span className="text-teal-600 text-lg mt-0.5">🏪</span>
+                  <div>
+                    <p className="font-semibold text-teal-900 text-sm">In-store pickup only</p>
+                    <p className="text-teal-700 text-sm">Shipping is not available at this time. Orders are picked up in store at our Greenfield location.</p>
+                  </div>
+                </div>
                 <h2 className="font-serif text-2xl font-bold text-chocolate-900 mb-6">Contact Information</h2>
 
                 <div className="space-y-6">
@@ -124,7 +144,7 @@ export default function CheckoutPage() {
 
                   <div>
                     <label htmlFor="notes" className="block font-semibold text-chocolate-900 mb-2">
-                      Delivery Notes or Special Requests
+                      Pickup Notes or Special Requests
                     </label>
                     <textarea
                       id="notes"
@@ -137,19 +157,24 @@ export default function CheckoutPage() {
                   </div>
                 </div>
 
-                <div className="mt-8 p-4 bg-teal-50 rounded-xl border border-teal-200">
-                  <p className="text-sm text-chocolate-700">
-                    <strong>Note:</strong> This is a demo checkout. No payment will be processed. 
-                    We'll contact you at the provided email to arrange payment and pickup/delivery.
-                  </p>
+                <div className="mt-8 p-4 bg-teal-50 rounded-xl border border-teal-200 flex gap-3">
+                  <span className="text-teal-600 text-lg mt-0.5">🏪</span>
+                  <div>
+                    <p className="font-semibold text-teal-900 text-sm">In-store pickup only</p>
+                    <p className="text-teal-700 text-sm">Shipping is not available at this time. Orders are picked up in store at our Greenfield location.</p>
+                  </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="w-full mt-8 px-8 py-4 bg-teal-600 text-white rounded-full font-bold text-lg hover:bg-teal-700 transition-all duration-300 hover:shadow-xl hover:scale-105 shadow-lg"
+                  disabled={isSubmitting}
+                  className="w-full mt-8 px-8 py-4 bg-teal-600 text-white rounded-full font-bold text-lg hover:bg-teal-700 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 hover:shadow-xl hover:scale-105 shadow-lg"
                 >
-                  Place Order
+                  {isSubmitting ? 'Placing Order...' : 'Place Order'}
                 </button>
+                {submitError && (
+                  <p className="text-red-600 text-sm text-center mt-3">{submitError}</p>
+                )}
               </form>
             </div>
 
@@ -168,8 +193,8 @@ export default function CheckoutPage() {
                       key={`${item.productId}-${JSON.stringify(item.selectedOptions)}`}
                       className="flex gap-3 pb-4 border-b border-chocolate-100"
                     >
-                      <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-teal-100 to-chocolate-100 flex items-center justify-center flex-shrink-0">
-                        <span className="text-2xl">{item.image}</span>
+                      <div className="w-16 h-16 rounded-lg bg-gradient-to-br from-teal-100 to-chocolate-100 flex-shrink-0 overflow-hidden">
+                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h3 className="font-semibold text-chocolate-900 text-sm mb-1">{item.name}</h3>
@@ -197,6 +222,10 @@ export default function CheckoutPage() {
                   <div className="flex justify-between text-chocolate-700">
                     <span>Tax (estimated)</span>
                     <span className="font-semibold">${tax.toFixed(2)}</span>
+                  </div>
+                  <div className="flex justify-between text-chocolate-700">
+                    <span className="text-sm">Fulfillment</span>
+                    <span className="text-sm font-semibold text-teal-600">In-store pickup</span>
                   </div>
                   <div className="pt-3 border-t-2 border-chocolate-200">
                     <div className="flex justify-between text-2xl font-bold text-chocolate-900">

@@ -7,24 +7,26 @@ const details = [
   {
     icon: MapPin,
     title: 'Location',
-    content: '7900 E US Highway 36, Avon, IN 46123',
-    link: 'https://maps.google.com/?q=7900+E+US+Highway+36+Avon+IN+46123',
+    content: '8100 E US Hwy 36, Suite J, Avon, IN 46123',
+    link: 'https://maps.google.com/?q=8100+E+US+Hwy+36+Suite+J+Avon+IN+46123',
   },
   {
     icon: Clock,
     title: 'Hours',
     content: (
       <>
-        Mon-Sat: 10am - 6pm<br />
-        Sunday: 12pm - 5pm
+        Mon–Thu: 11am – 6pm<br />
+        Fri: 11am – 7pm<br />
+        Sat: 11am – 6pm<br />
+        Sun: 12pm – 5pm
       </>
     ),
   },
   {
     icon: Phone,
     title: 'Phone',
-    content: '(317) 272-1906',
-    link: 'tel:+13172721906',
+    content: '(317) 268-6216',
+    link: 'tel:+13172686216',
   },
 ];
 
@@ -97,7 +99,7 @@ export default function VisitUs() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={isInView ? { opacity: 1, y: 0 } : {}}
                 transition={{ duration: 0.6, delay: 0.7, ease: 'easeInOut' }}
-                href="https://maps.google.com/?q=7900+E+US+Highway+36+Avon+IN+46123"
+                href="https://maps.google.com/?q=8100+E+US+Hwy+36+Suite+J+Avon+IN+46123"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center justify-center gap-2 w-full px-8 py-4 bg-teal-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-teal-700 hover:shadow-xl transition-all duration-300 hover:scale-105"
@@ -113,13 +115,11 @@ export default function VisitUs() {
               transition={{ duration: 0.8, delay: 0.4, ease: 'easeInOut' }}
               className="relative rounded-2xl overflow-hidden shadow-2xl h-[400px] lg:h-full min-h-[400px]"
             >
-              <div className="w-full h-full bg-gradient-to-br from-teal-200 via-chocolate-200 to-cream-200 flex items-center justify-center">
-                <div className="text-center text-chocolate-700 p-8">
-                  <MapPin className="w-16 h-16 mx-auto mb-4 text-teal-600" />
-                  <p className="font-serif text-2xl font-semibold mb-2">Map Placeholder</p>
-                  <p className="text-sm">Embedded Google Maps</p>
-                </div>
-              </div>
+              <img
+                src="/store-front.jpg"
+                alt="The Fudge Kettle storefront in Avon, Indiana"
+                className="w-full h-full object-cover"
+              />
             </motion.div>
           </div>
         </div>

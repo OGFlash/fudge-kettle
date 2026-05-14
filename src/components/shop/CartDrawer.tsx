@@ -71,8 +71,8 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                       className="bg-cream-50 rounded-2xl p-4"
                     >
                       <div className="flex gap-4">
-                        <div className="w-20 h-20 rounded-xl bg-gradient-to-br from-teal-100 to-chocolate-100 flex items-center justify-center flex-shrink-0">
-                          <span className="text-3xl">{item.image}</span>
+<div className="w-20 h-20 rounded-xl bg-gradient-to-br from-teal-100 to-chocolate-100 flex-shrink-0 overflow-hidden">
+                            <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
                         </div>
 
                         <div className="flex-1 min-w-0">

@@ -7,20 +7,20 @@ const products = [
   {
     icon: Heart,
     title: 'Handmade Fudge',
-    description: 'Rich, creamy fudge in classic and seasonal flavors, made fresh daily.',
-    emoji: '🍫',
+    description: 'Rich, creamy fudge in classic and seasonal flavors, made fresh in our Avon shop. Over 25 flavors to discover.',
+    image: '/fudge.jpg',
   },
   {
     icon: Candy,
     title: 'Specialty Candy',
-    description: 'Nostalgic favorites and unique confections you won\'t find anywhere else.',
-    emoji: '🍬',
+    description: "Nostalgic favorites, popular new candies, and freeze-dried treats we make right in the store for maximum freshness.",
+    image: '/freeze-dried-red-hots.jpg',
   },
   {
     icon: Gift,
     title: 'Artisan Gifts',
-    description: 'Locally-sourced treasures and curated gift boxes for every occasion.',
-    emoji: '🎁',
+    description: "Locally-crafted tumblers, candles, jewelry, wreaths, and more from our vendor section — unique gifts you won't find anywhere else.",
+    image: '/boozy-cakes-and-others.jpg',
   },
 ];
 
@@ -57,8 +57,8 @@ export default function ProductHighlights() {
                 className="group"
               >
                 <div className="bg-cream-50 rounded-3xl p-8 h-full transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 border-2 border-transparent hover:border-teal-200">
-                  <div className="bg-gradient-to-br from-teal-100 to-chocolate-100 rounded-2xl w-20 h-20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                    <span className="text-4xl">{product.emoji}</span>
+                  <div className="rounded-2xl w-20 h-20 mb-6 overflow-hidden flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                    <img src={product.image} alt={product.title} className="w-full h-full object-cover" />
                   </div>
                   
                   <h3 className="font-serif text-2xl font-semibold text-chocolate-900 mb-3">
